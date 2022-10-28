@@ -1,0 +1,60 @@
+version: '3.8'
+services:
+  # registry:
+  #   container_name: umwherelah-registry
+  #   build:
+  #     dockerfile: Dockerfile
+  #     context: "./registry"
+  #   ports:
+  #     - "12000:12000"
+
+  mysql_db:
+    container_name: umwherelah-mysql
+    # depends_on:
+    #   - registry
+    build:
+      dockerfile: Dockerfile
+      context: "./mysql"
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3307:3306"
+
+  backend:
+    container_name: umwherelah-backend
+    depends_on:
+      - mysql_db
+    restart: unless-stopped
+    build:
+      dockerfile: Dockerfile
+      context: "./backend"
+    ports:
+      - "6868:5000"
+    environment:
+      - DB_HOST=mysql_db
+      - DB_USER=root
+      - DB_PASSWORD=MYSQL_ROOT_PASSWORD
+      - DB_NAME=umwherelah
+      - DB_PORT=3306
+    stdin_open: true
+    tty: true
+  
+  frontend:
+    container_name: umwherelah-frontend
+    build:
+      dockerfile: Dockerfile
+      context: ./frontend
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql_db
+
+  adminer:
+    container_name: umwherelah-adminer
+    depends_on:
+      - mysql_db
+    build:
+      dockerfile: Dockerfile
+      context: ./adminer
+    ports:
+      - 8000:8080

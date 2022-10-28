@@ -1,0 +1,5 @@
+FROM adminer:latest
+
+ENV ADMINER_DEFAULT_SERVER mysql_db
+
+EXPOSE 8000

@@ -1,0 +1,50 @@
+version: '3.8'
+services:
+  mysql_db:
+    container_name: capstone-mysql
+    build:
+      dockerfile: Dockerfile
+      context: "./mysql"
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3307:3306"
+
+  backend:
+    container_name: capstone-backend
+    depends_on:
+      - mysql_db
+    restart: unless-stopped
+    build:
+      dockerfile: Dockerfile
+      context: "./backend"
+    ports:
+      - "6868:5000"
+    environment:
+      - DB_HOST=mysql_db
+      - DB_USER=root
+      - DB_PASSWORD=password
+      - DB_NAME=ESGDatabase
+      - DB_PORT=3306
+    stdin_open: true
+    tty: true
+  
+  frontend:
+    container_name: capstone-frontend
+    build:
+      dockerfile: Dockerfile
+      context: ./frontend
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql_db
+
+  adminer:
+    container_name: capstone-adminer
+    depends_on:
+      - mysql_db
+    build:
+      dockerfile: Dockerfile
+      context: ./adminer
+    ports:
+      - 8000:8080
