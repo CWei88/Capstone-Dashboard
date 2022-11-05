@@ -108,8 +108,8 @@ function HomeDashboard() {
                 <ReportsByCompany reportData={reports} />
             </Grid>
         </Grid>
-
         </Box>
+        
         </div>
     );
 }
