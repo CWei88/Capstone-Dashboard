@@ -3,6 +3,7 @@ import PageNotFound from "./pages/PageNotFound";
 import React from "react";
 import Box from "@mui/material/Box";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Company from "./pages/Company";
 
 function App() {
   return (
@@ -10,8 +11,9 @@ function App() {
       <Router>
         <Box>
           <Routes>
-          <Route path="/" element={<HomeDashboard />} />
-          <Route path="*" element={<PageNotFound />} />
+          <Route exact path="" element={<HomeDashboard />} />
+          <Route exact path="*" element={<PageNotFound />} />
+          <Route exact path="/company" element={<Company />} />
           </Routes>
         </Box>
       </Router>
