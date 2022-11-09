@@ -31,3 +31,16 @@ export const getAllReport = async(req, res) => {
         res.status(500).json({msg: error.message});
     }
 }
+
+export const getReportsByCompany = async(req, res) => {
+    try {
+        const response = await Report.findAll({
+            where: {
+                companyName: req.params.companyName
+            }
+        });
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({msg: error.message});
+    }
+}

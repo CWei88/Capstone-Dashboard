@@ -18,7 +18,7 @@ services:
       dockerfile: Dockerfile
       context: "./backend"
     ports:
-      - "6868:5000"
+      - "6868:6868"
     environment:
       - DB_HOST=mysql_db
       - DB_USER=root

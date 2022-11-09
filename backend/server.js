@@ -45,6 +45,6 @@ app.use(ReportRoute);
 
 store.sync();
 
-const listener = app.listen(process.env.APP_PORT || 5000, () => {
+const listener = app.listen(process.env.APP_PORT || 6868, () => {
     console.log('App is listening on port ' + listener.address().port)
 });
