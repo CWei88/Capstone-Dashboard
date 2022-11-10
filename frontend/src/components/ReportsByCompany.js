@@ -1,7 +1,7 @@
 import Table from 'react-bootstrap/Table';
 
 export default function ReportsByCompany({reportData, handleReportSelect}) {
-    console.log(reportData);
+    console.log("Report Data" + reportData);
     return (
         <div className="ReportsByCompany">
         <Table striped bordered hover>

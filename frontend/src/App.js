@@ -4,6 +4,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Company from "./pages/Company";
+import FileUploadPage from "./pages/FileUploadPage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Box>
           <Routes>
           <Route exact path="" element={<HomeDashboard />} />
+          <Route exact path="/upload" element={<FileUploadPage />} />
           <Route exact path="*" element={<PageNotFound />} />
           <Route exact path="/company" element={<Company />} />
           </Routes>
