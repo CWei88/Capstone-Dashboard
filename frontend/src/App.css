@@ -16,6 +16,14 @@
   color: #61dafb;
 }
 
+input.compInputBar {
+  margin-bottom: "100px";
+  background-color:#f47443;
+  color:white;
+}
+
+
+
 @keyframes App-logo-spin {
   from {
       transform: rotate(0deg);

@@ -52,6 +52,7 @@ function HomeDashboard() {
             padding: "20px",
             margin: "10px",
             borderRadius: "10px",
+            marginBottom: "10px",
             }}
         >
 

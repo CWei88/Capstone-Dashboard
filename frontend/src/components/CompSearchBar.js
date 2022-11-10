@@ -20,6 +20,7 @@ export default function CompSearchBar({companyData, handleCompanySelect}) {
 
     return (
         <div>
+        <div class="compInputBar" style={{ marginBottom: "10px", }}>
         <div>
         <input
             type="search"
@@ -28,7 +29,7 @@ export default function CompSearchBar({companyData, handleCompanySelect}) {
             value={searchInput} />
         </div>
 
-        <div>
+        <div style={{ marginBottom: "10px", }}>
         <label>Pick Company:</label>
         <select onSelect={handleChange}>
         {valid_companies.map((item, index) => (
@@ -36,7 +37,28 @@ export default function CompSearchBar({companyData, handleCompanySelect}) {
         ))}
         </select>
         </div>
+
+        <div>
+            <table style={{ borderCollapse:"separate", borderSpacing:"20px 0", border: "1px solid black", borderRadius: "5px",  padding:"5px"}}>
+            <thead>
+                <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Industry</th>
+                </tr>
+            </thead>
+            <tbody>
+                {valid_companies.map((item, index) => (
+                <tr key={index}>
+                    <td>{item.id}</td>
+                    <td>{item.companyName}</td>
+                    <td>{item.industry}</td>
+                </tr>
+                ))}
+            </tbody>
+            </table>
         </div>
-        
+        </div>
+  
     );
 }

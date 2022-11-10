@@ -4,6 +4,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import CompanyHeader from '../components/CompanyHeader';
 import DownloadDoneSharpIcon from '@mui/icons-material/DownloadDoneSharp';
 import CancelSharpIcon from '@mui/icons-material/CancelSharp';
+import StickyHeadTable from '../components/StickyHeadTable';
 
 // Child Components
 
@@ -400,6 +401,12 @@ function Company() {
                                 </div>
                     </Grid>
 
+                </Grid>
+
+                <Grid>
+                    <Grid item>
+                        <StickyHeadTable />
+                    </Grid>
                 </Grid>
             </Box>
         </div>
