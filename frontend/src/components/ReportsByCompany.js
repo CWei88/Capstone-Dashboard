@@ -4,10 +4,10 @@ export default function ReportsByCompany({reportData, handleReportSelect}) {
     console.log(reportData);
     return (
         <div className="ReportsByCompany">
-        <Table striped bordered hover>
+        <Table striped bordered hover style={{ borderCollapse:"separate", borderSpacing:"20px 0", border: "1px solid black", borderRadius: "5px",  marginBottom:"10px", padding:"5px" }}>
         <thead>
         <tr>
-            <th>Id</th>
+            <th>ID</th>
             <th>Company</th>
             <th>Year</th>
         </tr>
@@ -24,7 +24,7 @@ export default function ReportsByCompany({reportData, handleReportSelect}) {
         </Table>
 
         <div>
-        <label>Pick Report:</label>
+        <label style={{ marginRight:"20px", }}>Pick Report:</label>
         <select onSelect={handleReportSelect}>
         {reportData.map((item, index) => (
             <option value={item.year}>{item.year}</option>
