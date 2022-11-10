@@ -1,38 +1,20 @@
 import React, {useState} from 'react'
 
 export default function CompSearchBar({companyData, handleCompanySelect}) {
-    const [searchInput, setSearchInput] = useState("");
     var companies = companyData;
 
     const handleChange = (event) => {
-        event.preventDefault();
-        setSearchInput(event.target.value);
-        handleCompanySelect(searchInput)
+        console.log("Handle Change CompSearchBar" + event.target.value);
+        handleCompanySelect(event.target.value);
     };
 
-    
-    var valid_companies = []
-    if (searchInput.length > 0) {
-        valid_companies = companies.filter((company) => {
-            return company.companyName.match(searchInput);
-        });
-    }
 
     return (
-        <div>
         <div class="compInputBar" style={{ marginBottom: "10px", }}>
-        <div>
-        <input
-            type="search"
-            placeholder="Search here"
-            onChange={handleChange}
-            value={searchInput} />
-        </div>
-
         <div style={{ marginBottom: "10px", }}>
         <label>Pick Company:</label>
-        <select onSelect={handleChange}>
-        {valid_companies.map((item, index) => (
+        <select onChange={handleChange}>
+        {companies.map((item, index) => (
             <option value={item.companyName}>{item.companyName}</option>
         ))}
         </select>
@@ -48,7 +30,7 @@ export default function CompSearchBar({companyData, handleCompanySelect}) {
                 </tr>
             </thead>
             <tbody>
-                {valid_companies.map((item, index) => (
+                {companies.map((item, index) => (
                 <tr key={index}>
                     <td>{item.id}</td>
                     <td>{item.companyName}</td>
@@ -59,6 +41,5 @@ export default function CompSearchBar({companyData, handleCompanySelect}) {
             </table>
         </div>
         </div>
-  
     );
 }

@@ -4,17 +4,15 @@ import Grid from "@mui/material/Unstable_Grid2";
 import axios from "axios";
 
 // Child Components
-import CompanyList from '../components/CompanyList';
 import CompSearchBar from '../components/CompSearchBar';
-import FileUpload from '../components/FileUpload';
 import ReportsByCompany from '../components/ReportsByCompany';
 import Report from '../components/Report';
 
 function HomeDashboard() {
     const [companies, setCompanies] = useState([]);
-    const [company, setCompany] = useState("BMW");
+    const [company, setCompany] = useState("");
     const [reports, setReports] = useState([]);
-    const [report, setReport] = useState({});
+    const [report, setReport] = useState();
 
     const fetchData = async() => {
         const resComapny = await axios.get("http://localhost:6868/company")
@@ -27,18 +25,27 @@ function HomeDashboard() {
     }, []);
     
     const handleCompanySelect = async(companyName) => {
+        console.log("Company from HandleCompanySelect" + companyName)
         setCompany(companyName);
-        console.log("Handle Select Company, HomeDashboard:" + companyName);
-        const resReport = await axios.get("http://localhost:6868/report/companyName/" + company)
+        console.log("Handle Select Company, HomeDashboard:" + company);
+        var compNameWithoutSpace = companyName.replace(' ', '_');
+        console.log("http://localhost:6868/report/companyName/" + compNameWithoutSpace);
+        const resReport = await axios.get("http://localhost:6868/report/companyName/" + companyName)
         const dataReport = await resReport.data
         setReports(dataReport)
     }
 
     const handleReportSelect = (year) => {
+        console.log("All reports");
+        console.log(reports);
         var chosen_report = reports.filter((report) => {
-                return report.year.match(year);
+                console.log(report.year);
+                console.log(year);
+                return report.year.toString() === year;
             });
-        setReport(chosen_report);
+        console.log("1 Report");
+        console.log(chosen_report);
+        setReport(chosen_report[0]);
         console.log("Handle Select Report, HomeDashboard:" + year);
     }
 
@@ -57,28 +64,20 @@ function HomeDashboard() {
         >
 
         <Grid container>
-            <Grid item>
+            <Grid item sx={{
+                margin: "10px"
+            }}>
                 <CompSearchBar companyData={companies} handleCompanySelect={handleCompanySelect}/>
             </Grid>
-        </Grid>
-
-        </Box>
-
-        <Box
-            sx={{
-            width: "100%",
-            backgroundColor: "white",
-            padding: "20px",
-            margin: "10px",
-            borderRadius: "10px",
-            }}
-        >      
-        <Grid container>
-            <Grid item>
+            <Grid item sx={{
+                margin: "10px"
+            }}>
                 <ReportsByCompany reportData={reports} handleReportSelect={handleReportSelect}/>
             </Grid>
         </Grid>
+
         </Box>
+
         
         <Box
             sx={{

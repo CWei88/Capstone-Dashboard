@@ -8,43 +8,49 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
-const columns = [
-  { id: 'sentence', label: 'Sentence', minWidth: 250 },
-  { id: 'categories', label: 'Categories', minWidth: 80 },
-  {
-    id: 'attribute',
-    label: 'Attribute',
-    minWidth: 150,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'additionalInfo',
-    label: 'AdditionalInfo',
-    minWidth: 150,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-];
 
-function createData(sentence, categories, attribute, additionalInfo) {
-  return { sentence, categories, attribute, additionalInfo };
-}
-
-const rows = [
-  createData('sentence 1wd d wwwwwwww wwwwwwwwwwwwwwwwwwww wwwwwwwwwwwwwwwwwww wwwwwwww wwwwwwwwwww', '1', 'attribute herewwwwww wwwwwwwwwww wwwwwww wwwwwwwwww wwwwwwwwww wwwwwwww wwwwwwww', 'additional info hdwwww wwwwww wwwwwww wwwwwwww wwwwww wwwwww wwwww wwwwww were'),
-  createData('sentence 2', '0', 'attribute here', 'additional info here'),
-  createData('sentence 3', '3', 'attribute here', 'additional info here'),
-  createData('sentence 4', '2', 'attribute here', 'additional info here'),
-  createData('sentence 5', '3', 'attribute here', 'additional info here'),
-  createData('sentence 6', '2', 'attribute here', 'additional info here'),
-  createData('sentence 7', '3', 'attribute here', 'additional info here'),
-  createData('sentence 8', '2', 'attribute here', 'additional info here'),
-];
-
-export default function StickyHeadTable() {
+export default function StickyHeadTable({Report}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const columns = [
+    {
+      id: 'attribute',
+      label: 'Attribute',
+      width:"40%",
+      align: 'left',
+      format: (value) => value.toLocaleString('en-US'),
+    },
+    { 
+      id: 'sentence', 
+      label: 'Sentence', 
+      width:"40%",
+    },
+    {
+      id: 'additionalInfo',
+      label: 'AdditionalInfo',
+      width:"20%",
+      align: 'left',
+      format: (value) => value.toLocaleString('en-US'),
+    },
+  ];
+  
+  function createData(attribute, sentence, additionalInfo) {
+    return { attribute, sentence, additionalInfo };
+  }
+  
+  const rows = [
+    createData('Have your Scope 1 - 2 & Scope 3 emissions been verified by a third party?', Report.emissionAmountVerifiedSentences, 'additional info here'),
+    createData('Do you have an active program to support increasing green space and promote biodiversity?', Report.hasActiveProgramSentences, 'additional info here'),
+    createData('Do you have a long term (20 30 years) net zero target/commitment?', Report.hasNetZeroGoalSentences, 'additional info here'),
+    createData('What scenario has been utilised, and what methodology was applied?', Report.hasProtocolSentences, 'additional info here'),
+    createData('Are your emission reduction targets externally verified/assured?', Report.emissionTargetVerifiedSentences, 'additional info here'),
+    createData('Do you have a low carbon transition plan?', Report.hasTransitionPlanSentences, 'additional info here'),
+    createData('Do you provide incentives to your senior leadership team for the management of climate related issues?', Report.hasLeadershipIncentiveSentences, 'additional info here'),
+    createData('Does your transition plan include direct engagement with suppliers to drive them to reduce their emissions, or even switching to suppliers producing low carbon materials?', Report.hasSupplierEngagementSentences, 'additional info here'),
+    createData('Do you engage with value chain on climate-related issues?', Report.valueChainEngagementSentences, 'additional info here'),
+
+  ];
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -57,7 +63,7 @@ export default function StickyHeadTable() {
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440, }}>
+      <TableContainer sx={{ }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -65,7 +71,9 @@ export default function StickyHeadTable() {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  style={{ 
+                    width: column.width, 
+                  }}
                 >
                   {column.label}
                 </TableCell>
