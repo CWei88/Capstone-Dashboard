@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
 export default function CompSearchBar({companyData, handleCompanySelect}) {
-    const [searchInput, setSearchInput] = useState("BMW");
+    const [searchInput, setSearchInput] = useState("");
     var companies = companyData;
 
     const handleChange = (event) => {
@@ -20,7 +20,8 @@ export default function CompSearchBar({companyData, handleCompanySelect}) {
 
     return (
         <div>
-            <div class="compInputBar" style={{ marginBottom: "10px", }}>
+        <div class="compInputBar" style={{ marginBottom: "10px", }}>
+        <div>
         <input
             type="search"
             placeholder="Search here"
@@ -58,6 +59,6 @@ export default function CompSearchBar({companyData, handleCompanySelect}) {
             </table>
         </div>
         </div>
-        
+  
     );
 }

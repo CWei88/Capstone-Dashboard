@@ -14,35 +14,32 @@ function HomeDashboard() {
     const [companies, setCompanies] = useState([]);
     const [company, setCompany] = useState("BMW");
     const [reports, setReports] = useState([]);
-    const [report, setReport] = useState();
+    const [report, setReport] = useState({});
 
     const fetchData = async() => {
         const resComapny = await axios.get("http://localhost:6868/company")
         const dataCompany = await resComapny.data
         setCompanies(dataCompany)
-        
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, []);
+    
+    const handleCompanySelect = async(companyName) => {
+        setCompany(companyName);
+        console.log("Handle Select Company, HomeDashboard:" + companyName);
         const resReport = await axios.get("http://localhost:6868/report/companyName/" + company)
         const dataReport = await resReport.data
         setReports(dataReport)
     }
 
-    useEffect(() => {
-        fetchData()
-    })
-    
-    const handleCompanySelect = (companyName) => {
-        setCompany(companyName);
-        console.log("Handle Select Company, HomeDashboard:" + companyName);
-        fetchData();
-    }
-
     const handleReportSelect = (year) => {
         var chosen_report = reports.filter((report) => {
                 return report.year.match(year);
-            })[0];
+            });
         setReport(chosen_report);
         console.log("Handle Select Report, HomeDashboard:" + year);
-        fetchData();
     }
 
     return (
@@ -78,7 +75,7 @@ function HomeDashboard() {
         >      
         <Grid container>
             <Grid item>
-                <ReportsByCompany reportData={reports} />
+                <ReportsByCompany reportData={reports} handleReportSelect={handleReportSelect}/>
             </Grid>
         </Grid>
         </Box>
@@ -95,8 +92,8 @@ function HomeDashboard() {
         <Grid container>
             <Grid item>
                 {report
-                    ? <Report Report={report} handleReportSelect={handleReportSelect} />
-                    : <p>No reports found</p>
+                    ? <Report Report={report} />
+                    : <p>No report found</p>
                 }
             </Grid>
         </Grid>
