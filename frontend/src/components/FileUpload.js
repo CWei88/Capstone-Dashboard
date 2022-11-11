@@ -1,70 +1,65 @@
+import Papa from "papaparse";
 import React, {useState} from 'react';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function FileUpload() {
-	const [selectedFile, setSelectedFile] = useState();
-	const [isFilePicked, setIsFilePicked] = useState(false);
-
 	const [companyName, setCompanyName] = useState("");
 	const [year, setYear] = useState("");
+	const [industry, setIndustry] = useState("");
 
-	const changeHandler = (event) => {
-		setSelectedFile(event.target.files[0]);
-		setIsFilePicked(true);
-	};
+	const navigate = useNavigate();
 
-	const handleSubmission = () => {
-		const formData = new FormData();
-
-		formData.append('file', selectedFile);
-		formData.append('compName', companyName);
-		formData.append('year', year);
-
-		fetch(
-			'http://localhost:6868/preprocess',
-			{
-				method: 'POST',
-				body: formData,
+	const handleFileUpload = (event) => {
+		const files = event.target.files;
+			console.log(files);
+			if (files) {
+				console.log(files[0]);
+				var results = Papa.parse(files[0], {
+					header: true,
+					complete: async function(results) {
+						console.log("Finished:", results.data);
+						const csvData = results.data;
+						await axios.post("http://localhost:6868/report", {
+							companyName: companyName,
+							year: year,
+							industry: industry,
+							emissionAmountVerifiedSentences: csvData[0].sentence,
+							hasActiveProgramSentences: csvData[1].sentence, 
+							hasNetZeroGoalSentences: csvData[2].sentence, 
+							hasProtocolSentences: csvData[3].sentence
+						}).then((response) => {
+							//console.log(response.data.token);
+							return response.data.token;
+							})
+							.catch((error) => {
+								console.log(error);
+							});;
+						navigate("/");
+					}
+				});
+				console.log("Papaparse Result");				
 			}
-		)
-			.then((response) => response.json())
-			.then((result) => {
-				console.log('Success:', result);
-			})
-			.catch((error) => {
-				console.error('Error:', error);
-			});
 	};
 
 	const inputCompName = (event) => {
         event.preventDefault();
-            setCompanyName(event.target.value);
+        setCompanyName(event.target.value);
         };
 	const inputYear = (event) => {
         event.preventDefault();
-            setYear(event.target.value);
+        setYear(event.target.value);
         };
-		
+	const inputIndustry = (event) => {
+		event.preventDefault();
+		setIndustry(event.target.value);
+		};
 	return(
    <div>
 		<input type="text" placeholder="Company Name" onChange={inputCompName} value={companyName} />
+		<input type="text" placeholder="Industry" onChange={inputIndustry} value={industry} />
 		<input type="number" placeholder="Report Year" onChange={inputYear} value={year} />
-		<input type="file" name="file" onChange={changeHandler} />
-		{isFilePicked ? (
-			<div>
-				<p>Filename: {selectedFile.name}</p>
-				<p>Filetype: {selectedFile.type}</p>
-				<p>Size in bytes: {selectedFile.size}</p>
-				<p>
-					lastModifiedDate:{' '}
-					{selectedFile.lastModifiedDate.toLocaleDateString()}
-				</p>
-			</div>
-			) : (
-				<p>Select a file to show details</p>
-			)}
-			<div>
-				<button onClick={handleSubmission}>Submit</button>
-			</div>
+		<input type="file" name="file" accept=".csv" onChange={handleFileUpload} />
 		</div>
 	)
 }
