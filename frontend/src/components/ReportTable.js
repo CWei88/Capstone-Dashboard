@@ -28,8 +28,8 @@ export default function ReportTable({Report}) {
     }
   ];
   
-  function createData(attribute, sentence, additionalInfo) {
-    return { attribute, sentence, additionalInfo };
+  function createData(attribute, sentence) {
+    return { attribute, sentence };
   }
   
   const rows = [

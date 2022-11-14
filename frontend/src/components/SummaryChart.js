@@ -35,6 +35,7 @@ export default function SummaryChart({summaryData, yearList, industryList}) {
             const filteredSummary = summaryData.filter((summary) => {
                 return (summary.year.toString() === year && summary.industry === currentIndustry);
             })[0];
+            console.log("Summary Data for Jie Xiang to work with");
             console.log(filteredSummary);
             console.log(year);
             console.log(currentIndustry);
@@ -75,8 +76,8 @@ export default function SummaryChart({summaryData, yearList, industryList}) {
 
         </div>
         <p>Total number of reports: {numReport}</p>
-        <BarChart width={1500} height={600} data={chartData}>
-            <Bar dataKey="num" fill="green" />
+        <BarChart width={2100} height={600} data={chartData}>
+            <Bar dataKey="num" fill="purple" />
             <CartesianGrid stroke="#ccc" />
             <XAxis dataKey="name" />
             <YAxis />
