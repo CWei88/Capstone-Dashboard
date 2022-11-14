@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 
-export default function CompanyHeader({companyName, year}) {
+export default function CompanyHeader({companyName, year, industry}) {
     return (
         <div className="companyHeader">
             <Box 
@@ -11,7 +11,8 @@ export default function CompanyHeader({companyName, year}) {
                     }}
                 >
                 <h1 style={{alignItems: "center",}}> {companyName} </h1>
-                <h2> ESG Report for {year}</h2>
+                <h3> ESG Report for {year}</h3>
+                <h3>Industry: {industry} </h3>
                 
             </Box>
         </div>

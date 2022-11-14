@@ -27,7 +27,12 @@ export default function FileUpload() {
 							emissionAmountVerifiedSentences: csvData[0].sentence,
 							hasActiveProgramSentences: csvData[1].sentence, 
 							hasNetZeroGoalSentences: csvData[2].sentence, 
-							hasProtocolSentences: csvData[3].sentence
+							hasProtocolSentences: csvData[3].sentence, 
+							emissionTargetVerifiedSentences: csvData[4].sentence,
+							hasTransitionPlanSentences: csvData[5].sentence, 
+							hasLeadershipIncentiveSentences: csvData[6].sentence, 
+							hasSupplierEngagementSentences: csvData[7].sentence,
+							hasValueChainEngagementSentences: csvData[8].sentence
 						}).then((response) => {
 							//console.log(response.data.token);
 							return response.data.token;

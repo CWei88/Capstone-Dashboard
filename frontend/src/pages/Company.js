@@ -4,7 +4,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import CompanyHeader from '../components/CompanyHeader';
 import DownloadDoneSharpIcon from '@mui/icons-material/DownloadDoneSharp';
 import CancelSharpIcon from '@mui/icons-material/CancelSharp';
-import StickyHeadTable from '../components/StickyHeadTable';
+import ReportTable from '../components/ReportTable';
 
 // Child Components
 
@@ -405,7 +405,7 @@ function Company() {
 
                 <Grid>
                     <Grid item>
-                        <StickyHeadTable />
+                        <ReportTable />
                     </Grid>
                 </Grid>
             </Box>

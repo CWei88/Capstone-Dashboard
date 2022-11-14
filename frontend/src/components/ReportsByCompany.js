@@ -11,6 +11,7 @@ export default function ReportsByCompany({reportData, handleReportSelect}) {
         <div>
         <label style={{ margin:"20px", }}>Pick Report:</label>
         <select onChange={handleChange} style={{ marginBottom:"20px", }}>
+        <option value="Default option">Default option</option>
         {reportData.map((item, index) => (
             <option value={item.year}>{item.year}</option>
         ))}

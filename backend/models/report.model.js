@@ -10,6 +10,10 @@ const Report = db.define('report', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    industry: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     // Attribute 7: Have your Scope 1 - 2 & Scope 3 emissions been verified by a third party?
     emissionAmountVerified: {
         type: DataTypes.BOOLEAN,
@@ -59,7 +63,7 @@ const Report = db.define('report', {
     hasLeadershipIncentiveSentences: {
         type: DataTypes.STRING,
     },
-    // Attribute 22: Does your transition plan include direct engagement with suppliers to drive them to reduce their emissions, or even switching to suppliers producing low carbon materials?
+    // Attribute 23: Does your transition plan include direct engagement with suppliers to drive them to reduce their emissions, or even switching to suppliers producing low carbon materials?
     hasSupplierEngagement: {
         type: DataTypes.BOOLEAN,
     },
@@ -67,10 +71,10 @@ const Report = db.define('report', {
         type: DataTypes.STRING,
     },
     // Attribute 25: Do you engage with value chain on climate-related issues?
-    valueChainEngagementScale: {
-        type: DataTypes.INTEGER,
+    hasValueChainEngagement: {
+        type: DataTypes.BOOLEAN,
     },
-    valueChainEngagementSentences: {
+    hasValueChainEngagementSentences: {
         type: DataTypes.STRING,
     },
 });

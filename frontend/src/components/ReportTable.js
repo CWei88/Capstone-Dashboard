@@ -9,7 +9,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
 
-export default function StickyHeadTable({Report}) {
+export default function ReportTable({Report}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -24,15 +24,8 @@ export default function StickyHeadTable({Report}) {
     { 
       id: 'sentence', 
       label: 'Sentence', 
-      width:"40%",
-    },
-    {
-      id: 'additionalInfo',
-      label: 'AdditionalInfo',
-      width:"20%",
-      align: 'left',
-      format: (value) => value.toLocaleString('en-US'),
-    },
+      width:"60%",
+    }
   ];
   
   function createData(attribute, sentence, additionalInfo) {
@@ -40,15 +33,15 @@ export default function StickyHeadTable({Report}) {
   }
   
   const rows = [
-    createData('Have your Scope 1 - 2 & Scope 3 emissions been verified by a third party?', Report.emissionAmountVerifiedSentences, 'additional info here'),
-    createData('Do you have an active program to support increasing green space and promote biodiversity?', Report.hasActiveProgramSentences, 'additional info here'),
-    createData('Do you have a long term (20 30 years) net zero target/commitment?', Report.hasNetZeroGoalSentences, 'additional info here'),
-    createData('What scenario has been utilised, and what methodology was applied?', Report.hasProtocolSentences, 'additional info here'),
-    createData('Are your emission reduction targets externally verified/assured?', Report.emissionTargetVerifiedSentences, 'additional info here'),
-    createData('Do you have a low carbon transition plan?', Report.hasTransitionPlanSentences, 'additional info here'),
-    createData('Do you provide incentives to your senior leadership team for the management of climate related issues?', Report.hasLeadershipIncentiveSentences, 'additional info here'),
-    createData('Does your transition plan include direct engagement with suppliers to drive them to reduce their emissions, or even switching to suppliers producing low carbon materials?', Report.hasSupplierEngagementSentences, 'additional info here'),
-    createData('Do you engage with value chain on climate-related issues?', Report.valueChainEngagementSentences, 'additional info here'),
+    createData('Have your Scope 1 - 2 & Scope 3 emissions been verified by a third party?', Report.emissionAmountVerifiedSentences),
+    createData('Do you have an active program to support increasing green space and promote biodiversity?', Report.hasActiveProgramSentences),
+    createData('Do you have a long term (20 30 years) net zero target/commitment?', Report.hasNetZeroGoalSentences),
+    createData('What scenario has been utilised, and what methodology was applied?', Report.hasProtocolSentences),
+    createData('Are your emission reduction targets externally verified/assured?', Report.emissionTargetVerifiedSentences),
+    createData('Do you have a low carbon transition plan?', Report.hasTransitionPlanSentences),
+    createData('Do you provide incentives to your senior leadership team for the management of climate related issues?', Report.hasLeadershipIncentiveSentences),
+    createData('Does your transition plan include direct engagement with suppliers to drive them to reduce their emissions, or even switching to suppliers producing low carbon materials?', Report.hasSupplierEngagementSentences),
+    createData('Do you engage with value chain on climate-related issues?', Report.hasValueChainEngagementSentences),
 
   ];
 
