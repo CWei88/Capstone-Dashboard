@@ -28,7 +28,7 @@ export default function ReportTable({Report}) {
     { 
       id: 'sentence', 
       label: 'Sentence', 
-      width:"60%",
+      width:"50%",
     }
   ];
   
@@ -70,6 +70,13 @@ export default function ReportTable({Report}) {
                   align={column.align}
                   style={{ 
                     width: column.width, 
+                    backgroundColor: "lightgreen",
+                    borderColor: "black",
+                    borderWidth: "1px",
+                    borderStyle: "solid",
+                    padding: "4px",
+                    fontSize: 20, 
+                    fontWeight: 'bold'
                   }}
                 >
                   {column.label}
@@ -87,7 +94,17 @@ export default function ReportTable({Report}) {
                       const value = row[column.id];
                       return (
                         //<ReadMore key={column.id} align={column.align}>
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell 
+                        key={column.id} 
+                        align={column.align}
+                        style={{ 
+                          width: column.width, 
+                          borderColor: "black",
+                          borderWidth: "1px",
+                          borderStyle: "solid",
+                          padding: "4px",
+                        }}
+                        >
                           <ReactReadMoreReadLess
                             charLimit={200}
                             readMoreText={"Read more ▼"}

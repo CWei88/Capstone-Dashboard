@@ -3,8 +3,8 @@ import SummaryChart from "./SummaryChart";
 export default function DataSummary({Reports}) {
    console.log("All Reports from IndustrySummary");
    // Summary Reports by Year and Industry
-   let yearList = [...new Set(Reports.map(item => item.year))]; 
-   let industryList = [...new Set(Reports.map(item => item.industry))];
+   let yearList = [...new Set(Reports.map(item => item.year))].sort(); 
+   let industryList = [...new Set(Reports.map(item => item.industry))].sort();
    let summaryData = [];
    for (var i = 0; i < yearList.length; i++) { 
       for (var k = 0; k < industryList.length; k++) {
@@ -49,7 +49,7 @@ export default function DataSummary({Reports}) {
    console.log(industryList);
    return (
       <div>
-         <p>Data Summary</p>
+         <h1>Data Summary</h1>
          <SummaryChart summaryData={summaryData} yearList={yearList} industryList={industryList}/>
       </div>
    );

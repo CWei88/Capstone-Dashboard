@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 
 export default function CompSearchBar({companyData, handleCompanySelect}) {
     var companies = companyData;
+    companies.sort((a, b) => (a.companyName > b.companyName) ? 1 : -1)
 
     const handleChange = (event) => {
         console.log("Handle Change CompSearchBar" + event.target.value);
@@ -20,7 +21,7 @@ export default function CompSearchBar({companyData, handleCompanySelect}) {
         </select>
         </div>
 
-        <div>
+        {/* <div>
             <table style={{ borderCollapse:"separate", borderSpacing:"20px 0", border: "1px solid black", borderRadius: "5px",  padding:"5px"}}>
             <thead>
                 <tr>
@@ -39,7 +40,7 @@ export default function CompSearchBar({companyData, handleCompanySelect}) {
                 ))}
             </tbody>
             </table>
-        </div>
+        </div> */}
         </div>
     );
 }

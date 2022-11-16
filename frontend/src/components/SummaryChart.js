@@ -60,24 +60,29 @@ export default function SummaryChart({summaryData, yearList, industryList}) {
     return (
         <div>
         <div style={{ marginBottom: "10px", }}>
+
+        <div style={{ margin: "10px", }}>
         <label>Pick a year:</label>
         <select name="year" onChange={handleChange}>
         {yearList.map((item, index) => (
             <option value={item}>{item}</option>
         ))}
         </select>
-
-        <label>Pick an Industry:</label>
+        </div>
+        
+        <div style={{ margin: "10px", }}>
+        <label>Pick an industry:</label>
         <select name="industry" onChange={handleChange}>
         {industryList.map((item, index) => (
             <option value={item}>{item}</option>
         ))}
         </select>
+        </div>
 
         </div>
         <p>Total number of reports: {numReport}</p>
         <BarChart width={2100} height={600} data={chartData}>
-            <Bar dataKey="num" fill="purple" />
+            <Bar dataKey="num" fill="green" />
             <CartesianGrid stroke="#ccc" />
             <XAxis dataKey="name" />
             <YAxis />
