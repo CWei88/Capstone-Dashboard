@@ -1,14 +1,12 @@
 import Papa from "papaparse";
 import React, {useState} from 'react';
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 export default function FileUpload() {
 	const [companyName, setCompanyName] = useState("");
 	const [year, setYear] = useState("");
 	const [industry, setIndustry] = useState("");
-
-	const navigate = useNavigate();
+	const [result, setResult] = useState([]);
 
 	const handleFileUpload = (event) => {
 		const files = event.target.files;
@@ -20,6 +18,7 @@ export default function FileUpload() {
 					complete: async function(results) {
 						console.log("Finished:", results.data);
 						const csvData = results.data;
+						setResult(csvData);
 						await axios.post("http://localhost:6868/report", {
 							companyName: companyName,
 							year: year,
@@ -34,15 +33,17 @@ export default function FileUpload() {
 							hasSupplierEngagementSentences: csvData[7].sentence,
 							hasValueChainEngagementSentences: csvData[8].sentence
 						}).then((response) => {
+							window.location.reload(false);
 							//console.log(response.data.token);
 							return response.data.token;
 							})
 							.catch((error) => {
 								console.log(error);
+								window.location.reload(false);
 							});;
-						navigate("/");
 					}
 				});
+
 				console.log("Papaparse Result");				
 			}
 	};
