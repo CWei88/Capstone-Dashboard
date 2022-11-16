@@ -7,6 +7,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import ReactReadMoreReadLess from "react-read-more-read-less";
+import '../App.css'; // Tell webpack that Button.js uses these styles
+
+
 
 
 export default function ReportTable({Report}) {
@@ -82,10 +86,17 @@ export default function ReportTable({Report}) {
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
+                        //<ReadMore key={column.id} align={column.align}>
                         <TableCell key={column.id} align={column.align}>
+                          <ReactReadMoreReadLess
+                            charLimit={200}
+                            readMoreText={"Read more ▼"}
+                            readLessText={"Read less ▲"}
+                          >
                           {column.format && typeof value === 'number'
                             ? column.format(value)
                             : value}
+                          </ReactReadMoreReadLess>
                         </TableCell>
                       );
                     })}
